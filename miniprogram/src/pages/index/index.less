@@ -1,21 +1,152 @@
 /**index.wxss**/
-.userinfo {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+
+page{
+  	background: #f5f9fc;
 }
 
-.userinfo-avatar {
-	width: 128rpx;
-	height: 128rpx;
-	margin: 20rpx;
-	border-radius: 50%;
+.banner-section{
+	position: relative;
+	height: 400rpx;
+	background: #D1EEEE;
+	padding: 70rpx 40rpx 0;
+	margin-bottom: 150rpx;
+
+	.banner-bg{
+		position: absolute;
+		top: 60rpx;
+		right: 40rpx;
+		width: 160rpx;
+		height: 160rpx;
+	}
+
+	.banner-title{
+		line-height: 40rpx;
+		font-size: 18px;
+		color: #333;
+		margin-bottom: 30rpx;
+	}
+
+	.banner-desc{
+		line-height: 40rpx;
+		font-size: 12px;
+		color: #333;
+		margin-bottom: 30rpx;
+	}
 }
 
-.userinfo-nickname {
-	color: #aaa;
+.user-section{
+	position: relative;
+	height: 260rpx;
+	background: #B2DFEE;
+	box-shadow: 2px 4px 8px 0 rgba(46,61,73,.2);
+	border-radius: 8px;
+	padding: 40rpx 30rpx;
+	padding-left: 170rpx;
+
+	.user-avatar{
+		position: absolute;
+		top: 40rpx;
+		left: 30rpx;
+		width: 120rpx;
+		height: 120rpx;
+		background: #f5f9fc;
+		border-radius: 50%;
+	}
+
+	.user-nickName{
+		line-height: 60rpx;
+		color: #333;
+		font-size: 22px;
+		letter-spacing: .5px;
+		margin-bottom: 10rpx;
+
+		text{
+			font-size: 12px;
+			display: inline-block;
+			padding: 0 10rpx;
+			line-height: 28rpx;
+			border-radius: 14rpx;
+			background: #f5f9fc;
+			color: #999;
+			margin-left: 20rpx;
+		}
+	}
+
+	.user-desc{
+		line-height: 40rpx;
+		color: #757784;
+		font-size: 14px;
+		margin-bottom: 10rpx;
+	}
+
+	.user-tips{
+		line-height: 40rpx;
+		color: #444775;
+		font-size: 12px;
+	}
+
+	.user-btn{
+		position: absolute;
+		bottom: 20rpx;
+		right: 30rpx;
+		padding: 0 30rpx;
+		height: 28px;
+		line-height: 26px;
+		border: 1px solid #87CEFA;
+		color: #87CEFA;
+		text-align: center;
+		border-radius: 15px;
+		font-size: 12px;
+		background: #fff;
+	}
 }
 
-.usermotto {
-	margin-top: 200px;
+.call-section{
+	width: 90%;
+	margin: 20px auto;
+	background-color: #fff;
+
+	.call-item{
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: space-between;
+		padding: 10px 15px;
+		border-bottom: 1px dashed #ebedf2;
+
+		.call-avatar{
+			width: 42px;
+			height: 42px;
+			border-radius: 50%;
+		}
+
+		.call-information{
+			flex: 1;
+			height: 42px;
+			padding-left: 13px;
+			color: #575962;
+
+			.call-nickname{
+				height: 24px;
+				line-height: 24px;
+				font-size: 13px;
+				font-weight: 500;
+			}
+
+			.call-time{
+				height: 15px;
+				line-height: 15px;
+				margin-top: 2px;
+				font-size: 11px;
+			}
+		}
+
+		.call-btn{
+			width: 40px;
+			text-align: right;
+			font-size: 13px;
+			font-weight: 500;
+			color: #36a3f7;
+		}
+	}
 }

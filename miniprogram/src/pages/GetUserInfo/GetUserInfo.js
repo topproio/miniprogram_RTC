@@ -2,12 +2,10 @@ import dataStore from '../../utils/dataStore';
 
 Page({
     data: {
-        isload: false
+        isload: true
     },
 
     onLoad: function() {
-        this.setData({ isload: true });
-
         wx.getUserInfo({
             success: (res) => { // 如果用户已经授权
                 dataStore.put('userInfo', res);

@@ -1,8 +1,13 @@
+import dataStore from '../../utils/dataStore';
+
 Page({
     data: {
-        motto: 'Hello World'
+        userInfo: null,
+        friend: 0,
+        duration: 0
     },
     onLoad: function() {
-        console.log('ok');
+        const userInfo = dataStore.get('userInfo').userInfo;
+        this.setData({ userInfo });
     }
 });
