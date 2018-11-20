@@ -1,0 +1,3 @@
+<view class="loading-container" wx:if="{{isload}}">
+	<view class="loading-icon"></view>
+</view>

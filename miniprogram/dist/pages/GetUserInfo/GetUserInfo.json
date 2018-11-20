@@ -1,0 +1,6 @@
+{
+    "navigationBarTitleText": "申请授权",
+    "usingComponents": {
+        "c-loading": "/components/loading/loading"
+    }
+}
