@@ -1,4 +1,5 @@
 import dataStore from '../../utils/dataStore';
+import commonModel from '../../models/common';
 
 Page({
     data: {
@@ -7,9 +8,22 @@ Page({
 
     onLoad: function() {
         wx.getUserInfo({
-            success: (res) => { // 如果用户已经授权
-                dataStore.put('userInfo', res);
-                wx.reLaunch({ url: '/pages/index/index'});
+            success: ({ userInfo }) => { // 如果用户已经授权
+                dataStore.put('userInfo', userInfo);
+
+                const avatar = userInfo.avatarUrl;
+                const name = userInfo.nickName;
+
+                wx.login({
+                    success: ({code}) => {
+                        commonModel.login({avatar, name, code}).then(res => {
+                            console.log(res);
+
+                            wx.reLaunch({ url: '/pages/index/index'});
+                        });
+                    }
+                });
+
             },
             complete: () => {
                 this.setData({ isload: false });

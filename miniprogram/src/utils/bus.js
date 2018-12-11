@@ -23,14 +23,12 @@ class Bus {
         return this;
     }
 
-    emit(name) {
+    emit(name, ...args) {
         if (!this._watcher[name]) return;
-        const args = Array.prototype.slice.call(arguments, 1);
-        this._watcher[name].forEach(handler => {
-            handler.apply(null, args);
-        });
 
-        return this;
+        this._watcher[name].forEach(handler => {
+            handler(...args);
+        });
     }
 
     off(name, handler) {

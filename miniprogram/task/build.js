@@ -1,20 +1,18 @@
 const gulp = require('gulp');
+const config = require('../gulp.config.js');
 
-const OUTPUT_PATH = 'dist';
+const OUTPATH = config.output_path,
+	DEV_PATH = config.target_path;
 
-const TARGET_STATIC_PATH = [
-    'src/**',
-];
+const OPTION = config.build_option
 
-const TARGET_IGNORE_PATH = [
-    '!src/app.less',
-    '!src/**/*.less'
-];
-
-const TARGET_PATH = TARGET_STATIC_PATH.concat(TARGET_IGNORE_PATH)
+const IGNORE_PATH = OPTION.IGNORE_PATH.map(path => '!' + path)
+const TARGET_PATH = OPTION.TARGET_PATH.concat(IGNORE_PATH)
 
 gulp.task('build', function() {
+	if (!OPTION.init) return;
+
     gulp
-        .src(TARGET_PATH, { base: 'src' } )
-        .pipe(gulp.dest('dist'));
+        .src(TARGET_PATH, { base: DEV_PATH } )
+        .pipe(gulp.dest(OUTPATH));
 });

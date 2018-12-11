@@ -1,4 +1,11 @@
-class DataStore{
+/*
+ ** 全局的内存数据存储类
+ ** @methods  put [更新／新建数据]  @return DataStore
+ ** @methods  get [获取数据]  @return DataStore
+ ** @methods  destroy [清空数据]  @return null
+ */
+
+class DataStore {
     static getInstance() {
         if (!DataStore.instance) {
             DataStore.instance = new DataStore();

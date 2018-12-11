@@ -1,22 +1,26 @@
 const gulp = require('gulp');
 const less = require('gulp-less');
 const rename = require('gulp-rename');
-const postcss = require('gulp-postcss');
+// const postcss = require('gulp-postcss'); // 小程序自动补全
+// const autoprefixer = require('autoprefixer');
 const cssnano = require('gulp-cssnano');
-const autoprefixer = require('autoprefixer');
+const config = require('../gulp.config.js');
 
-const OUTPUT_PATH = 'dist';
+const DEV_PATH = config.target_path
+const OUTPUT_PATH = config.output_path
 
-const TARGET_PATH = [
-    'src/app.less',
-    'src/**/*.less'
-]
+const OPTION = config.style_option
+
+const IGNORE_PATH = OPTION.IGNORE_PATH.map(i => '!' + i)
+const TARGET_PATH = OPTION.TARGET_PATH.concat(IGNORE_PATH)
 
 gulp.task('style', function() {
+    if (!OPTION.init) return;
+    
     gulp
-        .src(TARGET_PATH, { base: 'src' })
+        .src(TARGET_PATH, { base: DEV_PATH })
         .pipe(less())
-        .pipe(postcss([autoprefixer(['iOS >= 8', 'Android >= 4.1'])]))
+        // .pipe(postcss([autoprefixer(['iOS >= 8', 'Android >= 4.1'])]))
         .pipe(
             cssnano({
                 zindex: false, //不计算zinde值
