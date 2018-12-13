@@ -2,7 +2,7 @@ import API from '../global/api';
 import requset from '../global/request';
 
 export default {
-    login: function(data) {
-        return requset.post(API.login, data);
+    create: function(id, formId) {
+        return requset.post(API.call, { id, formId });
     }
 };

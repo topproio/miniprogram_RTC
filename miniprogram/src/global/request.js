@@ -34,7 +34,7 @@ class SafeRequest {
                         if (res.statusCode === 200 && res.data.code === 200) {
                             reslove(res.data);
                         } else {
-                            reject(res);
+                            reject(res.data);
                         }
                     },
                     fail: reject

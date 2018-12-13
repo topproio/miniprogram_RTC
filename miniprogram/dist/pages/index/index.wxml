@@ -8,8 +8,8 @@
 			<view>toppro（中国）团队研制</view>
 		</view>
 		<view class="user-section">
-			<image class="user-avatar" src="{{ userInfo ? userInfo.avatarUrl : '../../assets/images/user_avatar.png'}}"></image>
-			<view class="user-nickName">{{ userInfo.nickName }}<text>hi</text></view>
+			<image class="user-avatar" src="{{ avatarUrl || '../../assets/images/user_avatar.png'}}"></image>
+			<view class="user-nickName">{{ nickName }}<text>hi</text></view>
 			<view class="user-desc">欢迎来到RTC！</view>
 			<view class="user-tips">
 				<view>好友数量 {{ friend }} 个</view>
@@ -17,18 +17,32 @@
 			</view>
 			<view class="user-operate">			
 				<button class="user-btn" hover-class="hover-class">创建群聊</button>
-				<button class="user-btn" hover-class="hover-class">添加好友</button>
+				<navigator 
+					url="/pages/AddFriend/AddFriend" 
+					class="user-btn"
+					hover-class="hover-class">添加好友</navigator>
 			</view>
 		</view>
 	</view>
 	<view class="call-section">
-		<view class="call-item">
-			<image class="call-avatar" src="../../assets/images/user_avatar.png"></image>
-			<view class="call-information">
-				<view class="call-nickname">{{ userInfo.nickName }}</view>
-				<view class="call-time">2018/02/21</view>
+		<form
+			class="call__form"
+			wx:for="{{friendList}}" 
+			wx:key="{{ index }}" 
+			wx:for-item="item" 
+			data-id="{{item.id}}"
+			report-submit="true"
+			bindsubmit="callHandle">
+			<view class="call-item">
+				<image class="call-avatar" src="{{ item.avatar || '../../assets/images/user_avatar.png'}}"></image>
+				<view class="call-information">
+					<view class="call-nickname">{{ item.name }}</view>
+					<view class="call-time">{{ item.updated_at }}</view>
+				</view>
+				<button form-type="submit"
+						class="call-btn" 
+					    hover-class="hover-class">呼叫</button>
 			</view>
-			<view class="call-btn" hover-class="hover-class">呼叫</view>
-		</view>
+		</form>
 	</view>
 </view>

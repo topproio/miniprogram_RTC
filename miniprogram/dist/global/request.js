@@ -1,3 +1,5 @@
+import dataStore from '../utils/dataStore';
+
 const Methods = ['OPTIONS', 'GET', 'HEAD', 'POST', 'PUT', 'DELETE', 'TRACE', 'CONNECT'];
 
 class SafeRequest {
@@ -18,17 +20,21 @@ class SafeRequest {
     _requestInit(method) {
         return function(url, data) {
             return new Promise((reslove, reject) => {
+                const header = {
+                    'Authorization': 'Bearer ' + dataStore.get('token')
+                };
+
                 wx.request({
                     url,
-                    header: null,
+                    header,
                     data,
                     method,
                     dataType: 'json',
                     success: res => {
-                        if (res.statusCode === 200) {
+                        if (res.statusCode === 200 && res.data.code === 200) {
                             reslove(res.data);
                         } else {
-                            reject(res);
+                            reject(res.data);
                         }
                     },
                     fail: reject

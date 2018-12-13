@@ -25,8 +25,7 @@ class SocialAuthorizationRequest extends FormRequest
     {
         $rules = [
             'code' => 'required|string',
-            'name' => 'required|string',
-            'avatar' => 'required|string',
+            'name' => 'required|string'
         ];
 
         return $rules;

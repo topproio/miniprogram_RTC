@@ -47,6 +47,6 @@ class AuthorizationsController extends Controller
 
         // 为对应用户创建 JWT
         $token = Auth::guard('api')->fromUser($user);
-        return $this->response->array(['token' => $token]);
+        return $this->response->array( apiResponse(['token' => $token]), 'success');
     }
 }

@@ -1,34 +1,27 @@
 <!--index.wxml-->
 <view class="container">
-	<view class="banner-section">
-		<image class="banner-bg" src="../../assets/images/banner-bg.png"></image>
-		<view class="banner-title">RTC -- 让沟通更有便捷</view>
-		<view class="banner-desc">
-			<view>RTC，实时音频通话</view>
-			<view>toppro（中国）团队研制</view>
-		</view>
-		<view class="user-section">
-			<image class="user-avatar" src="{{ userInfo ? userInfo.avatarUrl : '../../assets/images/user_avatar.png'}}"></image>
-			<view class="user-nickName">{{ userInfo.nickName }}<text>hi</text></view>
-			<view class="user-desc">欢迎来到RTC！</view>
-			<view class="user-tips">
-				<view>好友数量 {{ friend }} 个</view>
-				<view>通话时长 {{ duration }} 小时</view>
-			</view>
-			<view class="user-operate">			
-				<button class="user-btn" hover-class="hover-class">创建群聊</button>
-				<button class="user-btn" hover-class="hover-class">添加好友</button>
-			</view>
-		</view>
+	<view class="search__header">
+		<input placeholder="请输入微信名称" auto-focus class="search__input" data-bind="name" bindinput="inputBuilding" />
+		<navigator 
+			url="/page/index/index" 
+			class="search__back"
+			open-type="switchTab"
+			hover-class="hover-class">返回</navigator>
 	</view>
-	<view class="call-section">
-		<view class="call-item">
-			<image class="call-avatar" src="../../assets/images/user_avatar.png"></image>
-			<view class="call-information">
-				<view class="call-nickname">{{ userInfo.nickName }}</view>
-				<view class="call-time">2018/02/21</view>
-			</view>
-			<view class="call-btn" hover-class="hover-class">呼叫</view>
+	<view class="search-result">
+		<view class="search-item" 
+			hover-class="hover-class" 
+			wx:for="{{userList}}" 
+			wx:key="{{index}}" 
+			data-id="{{item.id}}"
+			bindtap="addFriendHandle">
+			<image class="user__avatar" src="{{item.avatar || '../../assets/images/user_avatar.png'}}"></image>
+			<view class="user__name">{{item.name}} </view>
+			<image class="user__icon" src="../../assets/images/add.png"></image>
+		</view>
+
+		<view class="search-item" wx:if="{{!userList.length}}">
+			<view class="user__name">暂无数据</view>
 		</view>
 	</view>
 </view>

@@ -1,5 +1,5 @@
 import API from '../global/api';
-import requset from '../utils/request';
+import requset from '../global/request';
 
 export default {
     login: function(data) {

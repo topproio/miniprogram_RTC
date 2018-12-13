@@ -26,7 +26,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token', 'weixin_session_key', 'weapp_openid'
     ];
 
     // Rest omitted for brevity
@@ -39,5 +39,20 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    public function UserFriends()
+    {
+        return $this->hasMany(UserFriend::class, 'uid');
+    }
+
+    public function getFriendListByids($ids)
+    {
+        return $this->whereIn('id', $ids)->get();
+    }
+
+    public function getUserById($id)
+    {
+        return $this->where('id', $id)->first();;
     }
 }
