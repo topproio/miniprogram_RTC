@@ -1,4 +1,4 @@
-const ApiOrigin = 'http://api.rtc.test';
+const ApiOrigin = 'http://leo.primercss.cn';
 
 const WEB_CONFIG = {
     login: ApiOrigin + '/api/webapp/login',

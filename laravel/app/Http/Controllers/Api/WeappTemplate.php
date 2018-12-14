@@ -18,7 +18,7 @@ class WeappTemplate extends Controller
 
     	$miniProgram = \EasyWeChat::miniProgram();
 
-    	$miniProgram->template_message->send([
+    	$ret = $miniProgram->template_message->send([
 		    'touser' => $friendOpenId,
 		    'template_id' => 'bnrY8XqOxyOt3ySeO19f5K9K7oRszVymvANO80CO-NQ',
 		    'page' => 'index',
@@ -30,6 +30,6 @@ class WeappTemplate extends Controller
 		    ]
 		]);
 
-		return $this->response->array( apiResponse(['friendInfo' => $friendOpenId] , 'success'));
+		return $this->response->array( apiResponse(['formId' => $formId, 'res' => $ret] , 'success'));
     }
 }

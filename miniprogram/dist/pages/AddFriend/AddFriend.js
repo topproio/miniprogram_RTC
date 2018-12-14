@@ -1,4 +1,5 @@
 import userModel from '../../models/user';
+import bus from '../../utils/bus';
 
 Page({
     data: {
@@ -22,6 +23,8 @@ Page({
         const { id } = e.currentTarget.dataset;
 
         userModel.create(id).then(() => {
+            bus.emit('fetchFriend');
+
             wx.showToast({ title: '添加成功囖' });
         }).catch(err => {
             const { message } = err;
