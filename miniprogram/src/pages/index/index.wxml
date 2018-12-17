@@ -12,7 +12,7 @@
 			<view class="user-nickName">{{ nickName }}<text>hi</text></view>
 			<view class="user-desc">欢迎来到RTC！</view>
 			<view class="user-tips">
-				<view>好友数量 {{ friend }} 个</view>
+				<view>好友数量 {{ friendCount }} 个</view>
 				<view>通话时长 {{ duration }} 小时</view>
 			</view>
 			<view class="user-operate">			
@@ -25,7 +25,7 @@
 		</view>
 	</view>
 	<view class="call-section">
-		<form
+		<view
 			class="call__form"
 			wx:for="{{friendList}}" 
 			wx:key="{{ index }}" 
@@ -39,10 +39,11 @@
 					<view class="call-nickname">{{ item.name }}</view>
 					<view class="call-time">{{ item.updated_at }}</view>
 				</view>
-				<button form-type="submit"
-						class="call-btn" 
-					    hover-class="hover-class">呼叫</button>
+				<navigator
+    				url="/pages/ChatRoom/ChatRoom"
+					class="call-btn" 
+    				hover-class="hover-class">呼叫</navigator>
 			</view>
-		</form>
+		</view>
 	</view>
 </view>

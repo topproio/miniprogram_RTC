@@ -1,0 +1,27 @@
+<!--index.wxml-->
+<view class="page {{isChating ? 'chating' : ''}}">
+    <live-player
+        class="chat-player"
+    />
+
+    <live-pusher
+        url="https://domain/push_stream"
+        mode="RTC"
+        autopush
+        class="chat-pusher"
+    />
+
+    <cover-view class="wait-tips">请通知好友进入通讯</cover-view>
+    <cover-view class="notify-friend">
+        <button type="primary" open-type="share">通知好友</button>
+    </cover-view>
+
+    <cover-view class="chat-opera">
+        <cover-view class="opera__btn" hover-class="hover-class">
+            <cover-image src="../../assets/images/phone_icon.png" />  
+        </cover-view>
+        <cover-view class="opera__btn" hover-class="hover-class">
+            <cover-image src="{{ isMuted ? '../../assets/images/pngsound_cancel.png' : '../../assets/images/sound_live.png'}}" />
+        </cover-view>
+    </cover-view>
+</view>
