@@ -21,7 +21,7 @@ class WeappTemplate extends Controller
     	$ret = $miniProgram->template_message->send([
 		    'touser' => $friendOpenId,
 		    'template_id' => 'bnrY8XqOxyOt3ySeO19f5K9K7oRszVymvANO80CO-NQ',
-		    'page' => 'index',
+		    'page' => 'page/index/index',
 		    'form_id' => $formId,
 		    'data' => [
 		        'keyword1' => 'VALUE',
