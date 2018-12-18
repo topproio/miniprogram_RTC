@@ -1,8 +1,6 @@
 import bus from '../../utils/bus';
 import dataStore from '../../utils/dataStore';
 import userModel from '../../models/user';
-import callModel from '../../models/call';
-import rtcModel from '../../models/rtc';
 
 Page({
     data: {
@@ -20,10 +18,6 @@ Page({
         this.setData({ avatarUrl, nickName });
 
         this.fetchFriendList();
-
-        rtcModel.fetchSig().then(res => {
-            console.log(res);
-        });
     },
 
     fetchFriendList: function() {
@@ -32,15 +26,6 @@ Page({
             const friendCount = friendList.length;
 
             this.setData({ friendList, friendCount });
-        });
-    },
-
-    callHandle: function(e) {
-        const { formId } = e.detail;
-        const { id } = e.target.dataset;
-
-        callModel.create(id, formId).then(res => {
-            console.log(res);
         });
     },
 

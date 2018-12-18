@@ -25,9 +25,15 @@ class RTCController extends Controller
     public function GetUserSig()
     {
     	$userId = Auth::id();
-    	$usersig = $this->WebRTCSigApi->genUserSig($userId);
+    	$userSig = $this->WebRTCSigApi->genUserSig($userId);
+    	$privateMapKey = $this->WebRTCSigApi->genPrivMapEncrypt($userId, $userId);
 
-    	return $this->response->array( apiResponse( ['usersig' => $usersig], 'success') );
+    	$ret = [
+    		'userSig' => $userSig, 
+    		'privateMapKey' => $privateMapKey
+    	];
+
+    	return $this->response->array( apiResponse($ret, 'success') );
     }
 
 }

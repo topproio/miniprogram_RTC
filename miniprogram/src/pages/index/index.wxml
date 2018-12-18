@@ -29,10 +29,7 @@
 			class="call__form"
 			wx:for="{{friendList}}" 
 			wx:key="{{ index }}" 
-			wx:for-item="item" 
-			data-id="{{item.id}}"
-			report-submit="true"
-			bindsubmit="callHandle">
+			wx:for-item="item">
 			<view class="call-item">
 				<image class="call-avatar" src="{{ item.avatar || '../../assets/images/user_avatar.png'}}"></image>
 				<view class="call-information">
@@ -40,7 +37,7 @@
 					<view class="call-time">{{ item.updated_at }}</view>
 				</view>
 				<navigator
-    				url="/pages/ChatRoom/ChatRoom"
+    				url="{{'/pages/ChatRoom/ChatRoom?friendId=' + item.id}}"
 					class="call-btn" 
     				hover-class="hover-class">呼叫</navigator>
 			</view>
