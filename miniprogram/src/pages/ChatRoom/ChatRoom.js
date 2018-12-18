@@ -13,7 +13,7 @@ Page({
     },
 
     onLoad: function(option) {
-        const { friendId } = option.friendId;
+        const { friendId } = option;
 
         rtcModel.fetchSig(friendId).then(res => {
             const { sdkappid, userId, userSig, roomId, PrivMapEncrypt } = res.data;
