@@ -2,7 +2,7 @@
 	"pages":[
 		"pages/GetUserInfo/GetUserInfo",
 		"pages/index/index",
-		"pages/CallShare/CallShare",
+		"pages/ChatRoom/ChatRoom",
 		"pages/AddFriend/AddFriend"
 	],
 	"window":{

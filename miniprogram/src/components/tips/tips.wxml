@@ -1,0 +1,14 @@
+<view class="page-tips">
+    <view class="page-msg__icon-area">
+        <icon type="{{icon.type}}" size="{{icon.size}}"></icon>
+    </view>
+    <view class="page-msg__text-area">
+        <view class="page-msg__title">{{ title }}</view>
+        <view class="page-msg__desc">{{ description }}</view>
+    </view>
+    <view class="page-msg__opr-area">
+        <view class="page-btn-area">
+        	<slot name="button"></slot>
+        </view>
+    </view>
+</view>

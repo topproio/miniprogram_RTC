@@ -7,7 +7,7 @@ Page({
     data: {
         nickName: '',
         avatarUrl: '',
-        friend: 0,
+        friendCount: 0,
         duration: 0,
         friendList: []
     },
@@ -24,7 +24,9 @@ Page({
     fetchFriendList: function() {
         userModel.list().then(res => {
             const { friendList } = res.data;
-            this.setData({ friendList });
+            const friendCount = friendList.length;
+
+            this.setData({ friendList, friendCount });
         });
     },
 
