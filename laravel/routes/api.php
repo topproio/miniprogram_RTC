@@ -10,6 +10,6 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api'], function($api) 
         $api->post('users/create', 'UsersController@create')->name('api.users.create');
         $api->get('users', 'UsersController@index')->name('api.users.index');
 
-        $api->get('rtc/usersig', 'RTCController@GetUserSig')->name('api.rtc.usersig');
+        $api->get('rtc/sig', 'RTCController@GetRTCSig')->name('api.rtc.sig');
     });
 });

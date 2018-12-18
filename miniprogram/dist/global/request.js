@@ -31,10 +31,15 @@ class SafeRequest {
                     method,
                     dataType: 'json',
                     success: res => {
-                        if (res.statusCode === 200 && res.data.code === 200) {
+                        switch(true) {
+                        case res.statusCode === 200 && res.data.code === 200:
                             reslove(res.data);
-                        } else {
-                            reject(res.data);
+                            break;
+                        case res.statusCode === 200 && res.data.code !== (200 && undefined):
+                            reslove(res.data);
+                            break;
+                        default:
+                            reslove(res.data);
                         }
                     },
                     fail: reject

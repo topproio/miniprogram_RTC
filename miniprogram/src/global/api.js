@@ -1,5 +1,6 @@
 // const ApiOrigin = 'http://leo.primercss.cn';
 const ApiOrigin = 'http://api.rtc.test';
+const RTCApi = 'https://official.opensso.tencent-cloud.com';
 
 const WEB_CONFIG = {
     login: ApiOrigin + '/api/webapp/login',
@@ -8,7 +9,8 @@ const WEB_CONFIG = {
     userCreate: ApiOrigin + '/api/users/create',
     userList: ApiOrigin + '/api/users',
 
-    rtcSig: ApiOrigin + '/api/rtc/usersig'
+    rtcSig: ApiOrigin + '/api/rtc/sig',
+    rtcRoomSig: RTCApi + '/v4/openim/jsonvideoapp'
 };
 
 export default WEB_CONFIG;

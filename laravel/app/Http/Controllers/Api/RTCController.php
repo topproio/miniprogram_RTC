@@ -22,15 +22,22 @@ class RTCController extends Controller
     	$this->WebRTCSigApi->SetPublicKey($publicKey);
 	}
 
-    public function GetUserSig()
+    public function GetRTCSig(Request $request)
     {
+    	$friendId = $request->friendId;
     	$userId = Auth::id();
+
+    	$roomId = $userId.$friendId;
+
     	$userSig = $this->WebRTCSigApi->genUserSig($userId);
-    	$privateMapKey = $this->WebRTCSigApi->genPrivMapEncrypt($userId, $userId);
+    	$privMapEncrypt = $this->WebRTCSigApi->genPrivMapEncrypt($userId, $roomId);
 
     	$ret = [
     		'userSig' => $userSig, 
-    		'privateMapKey' => $privateMapKey
+    		'PrivMapEncrypt' => $privMapEncrypt,
+    		'sdkappid' => config('rtc.appid'),
+    		'roomId' => $roomId,
+            'userId' => $userId
     	];
 
     	return $this->response->array( apiResponse($ret, 'success') );

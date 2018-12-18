@@ -1,27 +1,36 @@
 import dataStore from '../../utils/dataStore';
 import rtcModel from '../../models/rtc';
 
-let friendId; // 好友id
-
 Page({
     data: {
         isChating: false,
-        isMuted: false
+        isMuted: false,
+        pushUrl: '',
+        sdkappid: '',
+        roomid: '',
+        userId: '',
+        roomsig: ''
     },
 
     onLoad: function(option) {
-        friendId = option.friendId;
+        const { friendId } = option.friendId;
 
         rtcModel.fetchSig(friendId).then(res => {
+            const { sdkappid, userId, userSig, roomId, PrivMapEncrypt } = res.data;
+
+            this.setData({ userId });
+            return rtcModel.fetchRoomSig({ sdkappid, userId, userSig, roomId, PrivMapEncrypt });
+        }).then(res => {
             console.log(res);
         });
     },
 
     onShareAppMessage: function() {
         const { nickName } = dataStore.get('userInfo');
+        const { userId } = this.data;
         return {
             title: `好友${nickName}邀请您进入通讯`,
-            path: `/pages/ChatRoom/ChatRoom?userId=${friendId}`,
+            path: `/pages/ChatRoom/ChatRoom?friendId=${userId}`,
             imageUrl: '../../assets/images/banner-bg.png'
         };
     },
