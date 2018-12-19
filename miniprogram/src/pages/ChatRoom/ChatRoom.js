@@ -6,8 +6,9 @@ Page({
         isChating: false,
         isMuted: false,
         pushUrl: '',
+        playUrl: '',
         sdkappid: '',
-        roomid: '',
+        roomId: '',
         userId: '',
         roomsig: ''
     },
@@ -18,10 +19,13 @@ Page({
         rtcModel.fetchSig(friendId).then(res => {
             const { sdkappid, userId, userSig, roomId, PrivMapEncrypt } = res.data;
 
-            this.setData({ userId });
+            this.setData({ userId, sdkappid, roomId });
             return rtcModel.fetchRoomSig({ sdkappid, userId, userSig, roomId, PrivMapEncrypt });
-        }).then(res => {
-            console.log(res);
+        }).then(roomsig => {
+            const { userId, sdkappid, roomId } = this.data;
+            const pushUrl = `room://cloud.tencent.com?sdkappid=${sdkappid}&roomid=${roomId}&userid=${userId}&roomsig=${roomsig}`;
+
+            this.setData({ pushUrl });
         });
     },
 
@@ -35,4 +39,15 @@ Page({
         };
     },
 
+    statechange: function(e) {
+        const { code, message } = e.detail;
+        if (code !== 1020) return;
+
+        const userList = JSON.parse(message).userlist;
+        if (!userList.length) return;
+
+        const playUrl = userList[0].playurl;
+
+        this.setData({ playUrl });
+    }
 });

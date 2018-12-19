@@ -7,7 +7,7 @@ export default{
     },
     fetchRoomSig: function({sdkappid, userId, userSig, roomId, PrivMapEncrypt}) {
         const query = `?sdkappid=${sdkappid}&identifier=${userId}&usersig=${userSig}&random=9999&contenttype=json`;
-
+        const url = API.rtcRoomSig + query;
         const body = {
             ReqHead: {
                 Cmd:1,                               // 命令字，固定填1
@@ -25,6 +25,9 @@ export default{
             }
         };
 
-        return requset.post(API.rtcRoomSig + query, body);
+        return requset.post(url, body).then(res => {
+            const roomsig =  encodeURIComponent(JSON.stringify(res.RspBody));
+            return roomsig;
+        });
     }
 };

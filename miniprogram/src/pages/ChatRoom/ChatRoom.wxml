@@ -5,9 +5,11 @@
     />
 
     <live-pusher
-        url="https://domain/push_stream"
-        mode="RTC"
+        wx:if="{{pushUrl}}"
+        url="{{pushUrl}}"
+        mode="SD"
         autopush
+        bindstatechange="statechange"
         class="chat-pusher"
     />
 
