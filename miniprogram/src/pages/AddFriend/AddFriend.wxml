@@ -3,9 +3,8 @@
 	<view class="search__header">
 		<input placeholder="请输入微信名称" auto-focus class="search__input" data-bind="name" bindinput="inputBuilding" />
 		<navigator 
-			url="/page/index/index" 
 			class="search__back"
-			open-type="switchTab"
+			open-type="navigateBack"
 			hover-class="hover-class">返回</navigator>
 	</view>
 	<view class="search-result">
@@ -19,9 +18,10 @@
 			<view class="user__name">{{item.name}} </view>
 			<image class="user__icon" src="../../assets/images/add.png"></image>
 		</view>
-
-		<view class="search-item" wx:if="{{!userList.length}}">
-			<view class="user__name">暂无数据</view>
-		</view>
+	</view>
+	<view class="search-empty" wx:if="{{!userList.length && name }}">
+		<view class="search-empty__h1">没有搜索结果</view>
+		<image class="search-empty__icon" src="../../assets/images/invite.png"></image>
+		<button class="search-empty__btn" type="primary" open-type="share">立刻邀请好友</button>
 	</view>
 </view>

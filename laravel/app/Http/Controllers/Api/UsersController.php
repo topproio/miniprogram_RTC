@@ -13,9 +13,9 @@ class UsersController extends Controller
     public function search(Request $request)
     {
     	$name = $request->name;
-    	$users = User::where('name', 'like', '%' . $name . '%')->get();
+    	$userList = User::where('name', 'like', '%' . $name . '%')->simplePaginate(10);
 
-    	return $this->response->array( apiResponse(['user' => $users], 'success') );
+    	return $this->response->array( apiResponse(['userList' => $userList], 'success') );
     }
 
     public function create(Request $request)
