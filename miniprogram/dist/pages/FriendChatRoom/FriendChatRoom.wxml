@@ -1,5 +1,5 @@
-<!--index.wxml-->
-<view class="page {{isChating ? 'chating' : ''}}">
+<!--pages/page.wxml-->
+<view class="page">
     <live-player
         v-if="{{playUrl}}"
         src="{{playUrl}}"
@@ -16,11 +16,6 @@
         bindstatechange="statechange"
         class="chat-pusher"
     />
-
-    <cover-view class="wait-tips">请通知好友进入通讯</cover-view>
-    <cover-view class="notify-friend">
-        <button type="primary" open-type="share">通知好友</button>
-    </cover-view>
 
     <cover-view class="chat-opera">
         <cover-view class="opera__btn" hover-class="hover-class" bindtap="stopChat">

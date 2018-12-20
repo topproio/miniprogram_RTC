@@ -8,6 +8,7 @@
         "dev": "gulp watch",
         "fix": "gulp eslint --fix",
         "com": "gulp template --components",
+        "page": "gulp template --pages",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "repository": {

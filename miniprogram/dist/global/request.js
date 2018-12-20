@@ -36,7 +36,7 @@ class SafeRequest {
                             reslove(res.data);
                             break;
                         case res.statusCode === 200 && res.data.code !== (200 && undefined):
-                            reslove(res.data);
+                            reject(res.data);
                             break;
                         default:
                             reslove(res.data);

@@ -1,13 +1,19 @@
 <!--index.wxml-->
 <view class="page {{isChating ? 'chating' : ''}}">
     <live-player
+        v-if="{{playUrl}}"
+        src="{{playUrl}}"
+        mode="SD" 
+        autoplay
         class="chat-player"
     />
 
     <live-pusher
-        url="https://domain/push_stream"
-        mode="RTC"
+        wx:if="{{pushUrl}}"
+        url="{{pushUrl}}"
+        mode="SD"
         autopush
+        bindstatechange="statechange"
         class="chat-pusher"
     />
 
@@ -17,7 +23,7 @@
     </cover-view>
 
     <cover-view class="chat-opera">
-        <cover-view class="opera__btn" hover-class="hover-class">
+        <cover-view class="opera__btn" hover-class="hover-class" bindtap="stopChat">
             <cover-image src="../../assets/images/phone_icon.png" />  
         </cover-view>
         <cover-view class="opera__btn" hover-class="hover-class">

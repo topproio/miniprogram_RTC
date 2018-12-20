@@ -3,10 +3,15 @@ import commonModel from '../../models/common';
 
 Page({
     data: {
-        isload: true
+        isload: true,
+        form: ''
     },
 
     onLoad: function() {
+        const form = dataStore.get('entryPage');
+        form && this.setData({ form });
+
+        console.log(form);
         const that = this;
         wx.getUserInfo({
             success: ({ userInfo }) => { // 如果用户已经授权
@@ -14,7 +19,6 @@ Page({
 
                 const avatar = userInfo.avatarUrl;
                 const name = userInfo.nickName;
-
 
                 this.loginRequest(avatar, name);
             },
@@ -38,7 +42,9 @@ Page({
                 commonModel.login({avatar, name, code}).then((res) => {
                     const { token } = res.data;
                     dataStore.put('token', token);
-                    wx.reLaunch({ url: '/pages/index/index'});
+
+                    const url = that.data.form || '/pages/index/index';
+                    wx.reLaunch({ url });
                 }).catch(that.hiddenLoad);
             },
             fail: that.hiddenLoad

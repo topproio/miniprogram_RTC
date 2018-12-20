@@ -1,13 +1,16 @@
 import API from '../global/api';
-import requset from '../global/request';
+import request from '../global/request';
 
 export default{
     fetchSig: function(friendId) {
-        return requset.get(API.rtcSig, { friendId });
+        return request.get(API.rtcSig, { friendId });
+    },
+    fetchFriendSig: function({ targetId, originId }) {
+        return request.get(API.rtcFriendSig, { targetId, originId });
     },
     fetchRoomSig: function({sdkappid, userId, userSig, roomId, PrivMapEncrypt}) {
         const query = `?sdkappid=${sdkappid}&identifier=${userId}&usersig=${userSig}&random=9999&contenttype=json`;
-
+        const url = API.rtcRoomSig + query;
         const body = {
             ReqHead: {
                 Cmd:1,                               // 命令字，固定填1
@@ -25,6 +28,9 @@ export default{
             }
         };
 
-        return requset.post(API.rtcRoomSig + query, body);
+        return request.post(url, body).then(res => {
+            const roomsig =  encodeURIComponent(JSON.stringify(res.RspBody));
+            return roomsig;
+        });
     }
 };

@@ -11,5 +11,6 @@ $api->version('v1', ['namespace' => 'App\Http\Controllers\Api'], function($api) 
         $api->get('users', 'UsersController@index')->name('api.users.index');
 
         $api->get('rtc/sig', 'RTCController@GetRTCSig')->name('api.rtc.sig');
+        $api->get('rtc/friendsig', 'RTCController@GetRTCFriendSig')->name('api.rtc.friendsig');
     });
 });
