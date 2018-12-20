@@ -31,7 +31,7 @@ class RTCController extends Controller
     	$friendId = $request->friendId;
     	$userId = Auth::id();
 
-    	$roomId = $userId.$friendId;
+    	$roomId = 12; //$userId.$friendId
 
     	$userSig = $this->WebRTCSigApi->genUserSig($userId);
     	$privMapEncrypt = $this->WebRTCSigApi->genPrivMapEncrypt($userId, $roomId);
@@ -62,7 +62,7 @@ class RTCController extends Controller
             return $this->response->array( apiResponse(['userId'=> $userId, 'targetId' => $targetId] , '当前用户没有权限访问', 500) );
         }
 
-        $roomId = $originId.$targetId;
+        $roomId = 12; //$originId.$targetId
 
         $userSig = $this->WebRTCSigApi->genUserSig($userId);
         $privMapEncrypt = $this->WebRTCSigApi->genPrivMapEncrypt($userId, $roomId);
