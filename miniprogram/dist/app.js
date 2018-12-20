@@ -1,9 +1,13 @@
+import dataStore from './utils/dataStore';
+
 App({
     onLaunch: function(options) {
-        const emtryPage = '/' + options.path;
+        const entryPage = '/' + options.path;
         const authPage = '/pages/GetUserInfo/GetUserInfo';
 
-        if (emtryPage === authPage) return;
-        wx.reLaunch({ url: authPage + '?form=' + emtryPage });
+        if (entryPage === authPage) return;
+
+        dataStore.put('entryPage', entryPage);
+        wx.reLaunch({ url: '/pages/GetUserInfo/GetUserInfo'});
     }
 });

@@ -8,9 +8,10 @@ Page({
     },
 
     onLoad: function(options) {
-        const { form } = options;
+        const form = dataStore.get('entryPage');
         form && this.setData({ form });
 
+        console.log(form);
         const that = this;
         wx.getUserInfo({
             success: ({ userInfo }) => { // 如果用户已经授权
@@ -18,7 +19,6 @@ Page({
 
                 const avatar = userInfo.avatarUrl;
                 const name = userInfo.nickName;
-
 
                 this.loginRequest(avatar, name);
             },

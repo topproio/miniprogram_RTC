@@ -10,12 +10,14 @@ Page({
         sdkappid: '',
         roomId: '',
         userId: '',
+        friendId: '',
         roomsig: ''
     },
 
     onLoad: function(option) {
         const { friendId } = option;
 
+        this.setData({ friendId });
         rtcModel.fetchSig(friendId).then(res => {
             const { sdkappid, userId, userSig, roomId, PrivMapEncrypt } = res.data;
 
@@ -31,10 +33,10 @@ Page({
 
     onShareAppMessage: function() {
         const { nickName } = dataStore.get('userInfo');
-        const { userId } = this.data;
+        const { userId, friendId } = this.data;
         return {
             title: `好友${nickName}邀请您进入通讯`,
-            path: `/pages/ChatRoom/ChatRoom?friendId=${userId}`,
+            path: `pages/FriendChatRoom/FriendChatRoom?originId=1&targetId=2`,
             imageUrl: '../../assets/images/banner-bg.png'
         };
     },
