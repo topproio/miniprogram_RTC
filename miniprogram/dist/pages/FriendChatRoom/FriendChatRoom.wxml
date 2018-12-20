@@ -1,2 +1,24 @@
 <!--pages/page.wxml-->
-<text>pages/page.wxml</text>
+<view class="page">
+    <live-player
+        class="chat-player"
+    />
+
+    <live-pusher
+        wx:if="{{pushUrl}}"
+        url="{{pushUrl}}"
+        mode="SD"
+        autopush
+        bindstatechange="statechange"
+        class="chat-pusher"
+    />
+
+    <cover-view class="chat-opera">
+        <cover-view class="opera__btn" hover-class="hover-class" bindtap="stopChat">
+            <cover-image src="../../assets/images/phone_icon.png" />  
+        </cover-view>
+        <cover-view class="opera__btn" hover-class="hover-class">
+            <cover-image src="{{ isMuted ? '../../assets/images/pngsound_cancel.png' : '../../assets/images/sound_live.png'}}" />
+        </cover-view>
+    </cover-view>
+</view>

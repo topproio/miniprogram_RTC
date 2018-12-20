@@ -61,5 +61,10 @@ Page({
      */
     onShareAppMessage: function() {
 
+    },
+
+    stopChat: function() {
+        const url = '/pages/index/index';
+        wx.reLaunch({ url });
     }
 });
