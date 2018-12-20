@@ -1,8 +1,8 @@
 {
 	"pages":[
-		"pages/FriendChatRoom/FriendChatRoom",
 		"pages/GetUserInfo/GetUserInfo",
 		"pages/index/index",
+		"pages/FriendChatRoom/FriendChatRoom",
 		"pages/ChatRoom/ChatRoom",
 		"pages/AddFriend/AddFriend"
 	],
