@@ -1,10 +1,16 @@
+import rtcModel from '../../models/rtc';
+
+
+let userId, sdkappid, roomId;
+
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-
+        pushUrl: '',
+        playUrl: ''
     },
 
     /**
@@ -13,60 +19,40 @@ Page({
     onLoad: function(option) {
         const { originId, targetId } = option;
 
-        console.log(option);
-    },
+        rtcModel.fetchFriendSig({ originId, targetId }).then(res => {
+            const { userSig, PrivMapEncrypt } = res.data;
 
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function() {
+            userId = res.data.userId;
+            sdkappid = res.data.sdkappid;
+            roomId = res.data.roomId;
 
-    },
+            return rtcModel.fetchRoomSig({ sdkappid, userId, userSig, roomId, PrivMapEncrypt });
+        }).then(roomsig => {
+            const pushUrl = `room://cloud.tencent.com?sdkappid=${sdkappid}&roomid=${roomId}&userid=${userId}&roomsig=${roomsig}`;
 
-    /**
-     * 生命周期函数--监听页面显示
-     */
-    onShow: function() {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
-    onHide: function() {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload: function() {
-
-    },
-
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    onPullDownRefresh: function() {
-
-    },
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function() {
-
-    },
-
-    /**
-     * 用户点击右上角分享
-     */
-    onShareAppMessage: function() {
-
+            console.log(pushUrl);
+            this.setData({ pushUrl });
+        }).catch(({message}) => {
+            const icon = 'none';
+            wx.showToast({ title: message, icon });
+            this.stopChat();
+        });
     },
 
     stopChat: function() {
         const url = '/pages/index/index';
         wx.reLaunch({ url });
+    },
+
+    statechange: function(e) {
+        const { code, message } = e.detail;
+        if (code !== 1020) return;
+
+        const userList = JSON.parse(message).userlist;
+        if (!userList.length) return;
+
+        const playUrl = userList[0].playurl;
+
+        this.setData({ playUrl });
     }
 });

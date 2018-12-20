@@ -24,6 +24,10 @@ class RTCController extends Controller
 
     public function GetRTCSig(Request $request)
     {
+        $this->validate($request, [
+            'friendId' => 'required|integer'
+        ]);
+
     	$friendId = $request->friendId;
     	$userId = Auth::id();
 
@@ -41,6 +45,37 @@ class RTCController extends Controller
     	];
 
     	return $this->response->array( apiResponse($ret, 'success') );
+    }
+
+    public function GetRTCFriendSig(Request $request)
+    {
+        $this->validate($request, [
+            'targetId' => 'required|integer',
+            'originId' => 'required|integer'
+        ]);
+
+        $userId = Auth::id();
+        $targetId = $request->targetId;
+        $originId = $request->originId;
+
+        if (intval($userId) !== intval($targetId)) {
+            return $this->response->array( apiResponse(['userId'=> $userId, 'targetId' => $targetId] , '当前用户没有权限访问', 500) );
+        }
+
+        $roomId = $originId.$targetId;
+
+        $userSig = $this->WebRTCSigApi->genUserSig($userId);
+        $privMapEncrypt = $this->WebRTCSigApi->genPrivMapEncrypt($userId, $roomId);
+
+        $ret = [
+            'userSig' => $userSig, 
+            'PrivMapEncrypt' => $privMapEncrypt,
+            'sdkappid' => config('rtc.appid'),
+            'roomId' => $roomId,
+            'userId' => $userId
+        ];
+
+        return $this->response->array( apiResponse($ret, 'success') );
     }
 
 }

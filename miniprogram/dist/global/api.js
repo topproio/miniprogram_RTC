@@ -1,5 +1,5 @@
-const ApiOrigin = 'http://leo.primercss.cn';
-// const ApiOrigin = 'http://api.rtc.test';
+// const ApiOrigin = 'http://leo.primercss.cn';
+const ApiOrigin = 'http://api.rtc.test';
 const RTCApi = 'https://official.opensso.tencent-cloud.com';
 
 const WEB_CONFIG = {
@@ -10,6 +10,7 @@ const WEB_CONFIG = {
     userList: ApiOrigin + '/api/users',
 
     rtcSig: ApiOrigin + '/api/rtc/sig',
+    rtcFriendSig: ApiOrigin + '/api/rtc/friendsig',
     rtcRoomSig: RTCApi + '/v4/openim/jsonvideoapp'
 };
 

@@ -36,7 +36,7 @@ Page({
         const { userId, friendId } = this.data;
         return {
             title: `好友${nickName}邀请您进入通讯`,
-            path: `pages/FriendChatRoom/FriendChatRoom?originId=1&targetId=2`,
+            path: `pages/FriendChatRoom/FriendChatRoom?originId=${userId}&targetId=${friendId}`,
             imageUrl: '../../assets/images/banner-bg.png'
         };
     },

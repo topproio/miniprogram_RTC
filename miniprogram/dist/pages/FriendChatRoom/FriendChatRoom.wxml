@@ -1,6 +1,10 @@
 <!--pages/page.wxml-->
 <view class="page">
     <live-player
+        v-if="{{playUrl}}"
+        src="{{playUrl}}"
+        mode="SD" 
+        autoplay
         class="chat-player"
     />
 

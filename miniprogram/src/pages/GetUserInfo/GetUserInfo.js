@@ -7,7 +7,7 @@ Page({
         form: ''
     },
 
-    onLoad: function(options) {
+    onLoad: function() {
         const form = dataStore.get('entryPage');
         form && this.setData({ form });
 
