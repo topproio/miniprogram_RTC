@@ -1,5 +1,5 @@
-// const ApiOrigin = 'http://leo.primercss.cn';
-const ApiOrigin = 'http://api.rtc.test';
+const ApiOrigin = 'http://leo.primercss.cn';
+// 'http://api.rtc.test'
 const RTCApi = 'https://official.opensso.tencent-cloud.com';
 
 const WEB_CONFIG = {
