@@ -23,7 +23,7 @@
     </cover-view>
 
     <cover-view class="chat-opera">
-        <cover-view class="opera__btn" hover-class="hover-class">
+        <cover-view class="opera__btn" hover-class="hover-class" bindtap="stopChat">
             <cover-image src="../../assets/images/phone_icon.png" />  
         </cover-view>
         <cover-view class="opera__btn" hover-class="hover-class">

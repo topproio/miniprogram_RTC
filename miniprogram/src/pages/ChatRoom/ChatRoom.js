@@ -50,6 +50,11 @@ Page({
 
         const playUrl = userList[0].playurl;
 
-        this.setData({ playUrl });
-    }
+        this.setData({ playUrl, isChating: true });
+    },
+
+    stopChat: function() {
+        const url = '/pages/index/index';
+        wx.reLaunch({ url });
+    },
 });
