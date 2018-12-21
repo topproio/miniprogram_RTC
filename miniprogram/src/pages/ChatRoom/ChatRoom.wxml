@@ -57,7 +57,7 @@
                 bindtap="soundToggle">
                 <cover-image 
                     class="chat-operater__image" 
-                    src="../../assets/images/{{isMuted?'sound-dis':'sound'}}.png" />
+                    src="../../assets/images/{{isMuted?'mic-dis':'mic'}}.png" />
             </cover-view>
         </cover-view>
     </view>

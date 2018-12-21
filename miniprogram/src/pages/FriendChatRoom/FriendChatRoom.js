@@ -56,6 +56,15 @@ Page({
         this.setData({ playUrl });
     },
 
+    playStateChange: function(e) {
+        const { code } = e.detail;
+
+        if (code === 3005) {
+            this.stopChat();
+            wx.showToast({ title: '好友退出通话', icon: 'none' });
+        }
+    },
+
     stopChat: function() {
         const url = '/pages/index/index';
         wx.reLaunch({ url });

@@ -25,6 +25,10 @@ Page({
         this.waitCountDown();
     },
 
+    onUnload: function() {
+        clearTimeout(waitTimer);
+    },
+
     onShareAppMessage: function() {
         const { nickName } = dataStore.get('userInfo');
 
@@ -33,10 +37,6 @@ Page({
             path: `pages/FriendChatRoom/FriendChatRoom?originId=${userId}&targetId=${friendId}`,
             imageUrl: '../../assets/images/banner-bg.png'
         };
-    },
-
-    onUnload: function() {
-        clearTimeout(waitTimer);
     },
 
     setPushUrl: function(friendId) {
@@ -70,7 +70,10 @@ Page({
     playStateChange: function(e) {
         const { code } = e.detail;
 
-        console.log(code);
+        if (code === 3005) {
+            this.stopChat();
+            wx.showToast({ title: '好友退出通话', icon: 'none' });
+        }
     },
 
     waitCountDown: function() {
@@ -85,7 +88,7 @@ Page({
 
     stopChat: function() {
         const url = '/pages/index/index';
-        wx.reLaunch({ url });
+        wx.reLaunch({ url }); 
     },
 
     cameraToggle: function() {
