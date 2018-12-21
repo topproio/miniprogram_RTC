@@ -1,47 +1,61 @@
 import dataStore from '../../utils/dataStore';
 import rtcModel from '../../models/rtc';
 
+let sdkappid, roomId, userId, friendId, waitTimer;
 Page({
     data: {
+        friendAvatar: '',
         isChating: false,
         isMuted: false,
         pushUrl: '',
         playUrl: '',
-        sdkappid: '',
-        roomId: '',
-        userId: '',
-        friendId: '',
-        roomsig: ''
+        cameraPosition: 'front'
     },
 
     onLoad: function(option) {
-        const { friendId } = option;
+        friendId = option.id;
 
-        this.setData({ friendId });
-        rtcModel.fetchSig(friendId).then(res => {
-            const { sdkappid, userId, userSig, roomId, PrivMapEncrypt } = res.data;
+        const friendAvatar = option.avatar || '';
+        this.setData({ friendAvatar });
 
-            this.setData({ userId, sdkappid, roomId });
+        this.setPushUrl(friendId);
+    },
+
+    onReady: function() {
+        this.waitCountDown();
+    },
+
+    onShareAppMessage: function() {
+        const { nickName } = dataStore.get('userInfo');
+
+        return {
+            title: `${nickName}邀请您进入通讯`,
+            path: `pages/FriendChatRoom/FriendChatRoom?originId=${userId}&targetId=${friendId}`,
+            imageUrl: '../../assets/images/banner-bg.png'
+        };
+    },
+
+    onUnload: function() {
+        clearTimeout(waitTimer);
+    },
+
+    setPushUrl: function(friendId) {
+        rtcModel.fetchSig(friendId).then(({data}) => {
+            const { userSig, PrivMapEncrypt } = data;
+
+            sdkappid = data.sdkappid;
+            userId = data.userId;
+            roomId = data.roomId;
+
             return rtcModel.fetchRoomSig({ sdkappid, userId, userSig, roomId, PrivMapEncrypt });
         }).then(roomsig => {
-            const { userId, sdkappid, roomId } = this.data;
             const pushUrl = `room://cloud.tencent.com?sdkappid=${sdkappid}&roomid=${roomId}&userid=${userId}&roomsig=${roomsig}`;
 
             this.setData({ pushUrl });
         });
     },
 
-    onShareAppMessage: function() {
-        const { nickName } = dataStore.get('userInfo');
-        const { userId, friendId } = this.data;
-        return {
-            title: `好友${nickName}邀请您进入通讯`,
-            path: `pages/FriendChatRoom/FriendChatRoom?originId=${userId}&targetId=${friendId}`,
-            imageUrl: '../../assets/images/banner-bg.png'
-        };
-    },
-
-    statechange: function(e) {
+    pushStateChange: function(e) {
         const { code, message } = e.detail;
         if (code !== 1020) return;
 
@@ -53,8 +67,28 @@ Page({
         this.setData({ playUrl, isChating: true });
     },
 
+    waitCountDown: function() {
+        waitTimer = setTimeout(() => {
+            clearTimeout(waitTimer);
+            if (this.data.isChating) return;
+
+            this.stopChat();
+            wx.showToast({ title: '退出通话 等待超时', icon: 'none' });
+        }, 90 * 1000);
+    },
+
     stopChat: function() {
         const url = '/pages/index/index';
         wx.reLaunch({ url });
     },
+
+    cameraToggle: function() {
+        const cameraPosition = this.data.cameraPosition === 'front' ? 'back' : 'front';
+        this.setData({ cameraPosition });
+    },
+
+    soundToggle: function() {
+        const isMuted = !this.data.isMuted;
+        this.setData({ isMuted });
+    }
 });

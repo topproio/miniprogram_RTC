@@ -32,9 +32,9 @@ Page({
             bus.emit('fetchFriend');
 
             wx.showToast({ title: '添加成功囖' });
-        }).catch(err => {
-            const { message } = err;
-            wx.showToast({ title: message, icon: 'none' });
+        }).catch(({message}) => {
+            const title = message;
+            wx.showToast({ title, icon: 'none' });
         });
     }
 });

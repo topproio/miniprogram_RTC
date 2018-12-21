@@ -11,7 +11,6 @@ Page({
         const form = dataStore.get('entryPage');
         form && this.setData({ form });
 
-        console.log(form);
         const that = this;
         wx.getUserInfo({
             success: ({ userInfo }) => { // 如果用户已经授权

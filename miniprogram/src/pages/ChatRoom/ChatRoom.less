@@ -1,88 +1,111 @@
 page{
-    background-color: #fff;
+    background-color: #000;
 }
 
-.chat-player{
-    display: none;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    z-index: 2;
-}
+.page--wait{
+    display: block;
 
-.chat-pusher{
-    position: absolute;
-    display: none;
-    width: 90px;
-    height: 120px;
-    top: 10px;
-    right: 10px;
-    z-index: 1;
-}
+    .friend-avatar{
+        position: relative;
+        width: 280rpx;
+        height: 280rpx;
+        margin: 30% auto 0;
+        overflow: visible;
 
-.wait-tips{
-    position: absolute;
-    width: 100%;
-    height: 30px;
-    line-height: 30px;
-    top: 0;
-    left: 0;
-    font-size: 14px;
-    text-align: center;
-    background-color: #576b95;
-    color: #fff;
-    z-index: 3;
-}
+        .friend-avatar__image{
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            animation: heart 1s linear infinite;
+            background-color: #fff;
+        }
+    }
 
-.notify-friend{
-    position: absolute;
-    width: 100%;
-    height: 46px;
-    bottom: 0;
-    left: 0;
-    z-index: 3;
+    .friend-status{
+        height: 30rpx;
+        line-height: 38rpx;
+        text-align: center;
+        margin-top: 80rpx;
+        font-size: 26rpx;
+        color: #87CEFA;
+    }
 
-    button{
-        border-radius: 0;
+    .friend-notify{
+        position: absolute;
+        width: 100%;
+        height: 46px;
+        bottom: 0;
+        left: 0;
+
+        button{
+            background-color: #87CEFA;
+            border-radius: 0;
+        }
     }
 }
 
-.chat-opera{
-    position: absolute;
+.page--chat{
     display: none;
-    justify-content: space-between;
-    width: 100%;
-    height: 45px;
-    left: 0;
-    bottom: 70px;
-    padding: 0 70px;
-    z-index: 3;
 
-    .opera__btn{
-        flex: 0 0 45px;
-        height: 45px;
-        background-color: #fff;
-        border-radius: 50%;
+    .chat-player{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+    }
+
+    .chat-pusher{
+        position: absolute;
+        width: 90px;
+        height: 120px;
+        top: 10px;
+        right: 10px;
+    }
+
+    .chat-operater{
+        position: absolute;
+        width: 100%;
+        height: 70px;
+        left: 0;
+        bottom: 20px;
+        text-align: center;
+        font-size: 0;
+
+        .chat-operater__item{
+            display: inline-block;
+            vertical-align: top;
+            height: 70px;
+            width: 70px;
+            margin: 0 3vw;
+
+            .chat-operater__image{
+                width: 100%;
+                height: 100%;
+            }
+        }
     }
 }
 
 .chating{
-    
-    .chat-player{
-        position: absolute;
-        display: block;
-    }
 
-    .chat-pusher{
-        display: block;
-    }
-
-    .wait-tips, .notify-friend{
+    .page--wait{
         display: none;
     }
+    
+    .page--chat{
+        display: block;
+    }
+}
 
-    .chat-opera{
-        display: flex;
+@keyframes heart{
+    0%{
+        transform: scale(0.8, 0.8);
+    }
+    25%{
+        transform: scale(1, 1);
+    }
+    100%{
+        transform: scale(0.8, 0.8);
     }
 }

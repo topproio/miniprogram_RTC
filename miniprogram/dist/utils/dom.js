@@ -27,6 +27,21 @@ const dom = {
                 handler.apply(null, args);
             }
         };
+    },
+
+    /*  [显示提示语]
+    **  @params     opts  { Object }  showToast原生穿参  icon默认为none
+    **  @params     cb    { function }  隐藏toast回调
+    */
+    showToast: function(opts, cb) {
+        const duration = opts.duration || 2000;
+        const icon = opts.icon || 'none';
+
+        wx.showToast(Object.assign(opts, { duration, icon }));
+        const timer = setTimeout(function() {
+            clearTimeout(timer);
+            cb && cb();
+        }, duration);
     }
 };
 

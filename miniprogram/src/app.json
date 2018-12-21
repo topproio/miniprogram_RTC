@@ -1,10 +1,10 @@
 {
 	"pages":[
 		"pages/GetUserInfo/GetUserInfo",
+		"pages/ChatRoom/ChatRoom",
 		"pages/AddFriend/AddFriend",
 		"pages/index/index",
-		"pages/FriendChatRoom/FriendChatRoom",
-		"pages/ChatRoom/ChatRoom"
+		"pages/FriendChatRoom/FriendChatRoom"
 	],
 	"window":{
 		"backgroundTextStyle":"light",

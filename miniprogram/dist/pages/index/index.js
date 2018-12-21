@@ -7,7 +7,6 @@ Page({
         nickName: '',
         avatarUrl: '',
         friendCount: 0,
-        duration: 0,
         friendList: []
     },
 

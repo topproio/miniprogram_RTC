@@ -1,33 +1,63 @@
 <!--index.wxml-->
-<view class="page {{isChating ? 'chating' : ''}}">
-    <live-player
-        v-if="{{playUrl}}"
-        src="{{playUrl}}"
-        mode="SD" 
-        autoplay
-        class="chat-player"
-    />
+<view class="page {{ isChating ? 'chating' : '' }}">
 
-    <live-pusher
-        wx:if="{{pushUrl}}"
-        url="{{pushUrl}}"
-        mode="SD"
-        autopush
-        bindstatechange="statechange"
-        class="chat-pusher"
-    />
+    <view class="page--wait">
+        <view class="friend-avatar">
+            <view class="friend-avatar__circle"></view> 
+            <image class="friend-avatar__image" src="{{friendAvatar ? friendAvatar : '../../assets/images/user_avatar.png'}}" /> 
+        </view>
+        <view class="friend-status">
+            <text>等待好友进入\n请邀请好友进入通讯</text>
+        </view>
+        <view class="friend-notify">
+            <button type="primary" open-type="share">通知好友</button>
+        </view>
+    </view>
 
-    <cover-view class="wait-tips">请通知好友进入通讯</cover-view>
-    <cover-view class="notify-friend">
-        <button type="primary" open-type="share">通知好友</button>
-    </cover-view>
+    <view class="page--chat">
+        <live-player
+            v-if="{{playUrl}}"
+            src="{{playUrl}}"
+            mode="SD" 
+            autoplay
+            class="chat-player"
+        />
 
-    <cover-view class="chat-opera">
-        <cover-view class="opera__btn" hover-class="hover-class" bindtap="stopChat">
-            <cover-image src="../../assets/images/phone_icon.png" />  
+        <live-pusher
+            wx:if="{{pushUrl}}"
+            url="{{pushUrl}}"
+            mode="SD"
+            autopush
+            device-position="{{cameraPosition}} "
+            bindstatechange="pushStateChange"
+            class="chat-pusher"
+        />
+
+        <cover-view class="chat-operater">
+            <cover-view 
+                class="chat-operater__item" 
+                hover-class="hover-class" 
+                bindtap="cameraToggle">
+                <cover-image 
+                    class="chat-operater__image" 
+                    src="../../assets/images/{{cameraPosition === 'front'?'camera':'camera-gray'}}.png" />  
+            </cover-view>
+            <cover-view 
+                class="chat-operater__item" 
+                hover-class="hover-class" 
+                bindtap="stopChat">
+                <cover-image 
+                    class="chat-operater__image" 
+                    src="../../assets/images/call_icon.png" />  
+            </cover-view>
+            <cover-view 
+                class="chat-operater__item" 
+                hover-class="hover-class" 
+                bindtap="soundToggle">
+                <cover-image 
+                    class="chat-operater__image" 
+                    src="../../assets/images/{{isMuted?'sound-dis':'sound'}}.png" />
+            </cover-view>
         </cover-view>
-        <cover-view class="opera__btn" hover-class="hover-class">
-            <cover-image src="{{ isMuted ? '../../assets/images/pngsound_cancel.png' : '../../assets/images/sound_live.png'}}" />
-        </cover-view>
-    </cover-view>
+    </view>
 </view>
