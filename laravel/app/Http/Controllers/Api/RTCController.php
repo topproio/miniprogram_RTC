@@ -63,11 +63,9 @@ class RTCController extends Controller
             return $this->response->array( apiResponse(['userId'=> $userId, 'targetId' => $targetId] , '当前用户没有权限访问', 500) );
         }
 
-        $hasAdd = DB::table('users_friend')->where('friend_id', $targetId)->where('uid', $userId)->exists();
+        $hasAdd = DB::table('users_friend')->where('friend_id', $originId)->where('uid', $userId)->exists();
         if (!$hasAdd) {
-            Auth::user()->UserFriends()->create([
-                'friend_id' => $targetId
-            ]);
+            Auth::user()->UserFriends()->create([ 'friend_id' => $originId ]);
         }
 
         $roomId = $originId.$targetId;

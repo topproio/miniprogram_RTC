@@ -13,16 +13,35 @@
         url="{{pushUrl}}"
         mode="SD"
         autopush
-        bindstatechange="statechange"
+        device-position="{{cameraPosition}} "
+        bindstatechange="pushStateChange"
         class="chat-pusher"
     />
 
-    <cover-view class="chat-opera">
-        <cover-view class="opera__btn" hover-class="hover-class" bindtap="stopChat">
-            <cover-image src="../../assets/images/phone_icon.png" />  
+    <cover-view class="chat-operater">
+        <cover-view 
+            class="chat-operater__item" 
+            hover-class="hover-class" 
+            bindtap="cameraToggle">
+            <cover-image 
+                class="chat-operater__image" 
+                src="../../assets/images/{{cameraPosition === 'front'?'camera':'camera-gray'}}.png" />  
         </cover-view>
-        <cover-view class="opera__btn" hover-class="hover-class">
-            <cover-image src="{{ isMuted ? '../../assets/images/pngsound_cancel.png' : '../../assets/images/sound_live.png'}}" />
+        <cover-view 
+            class="chat-operater__item" 
+            hover-class="hover-class" 
+            bindtap="stopChat">
+            <cover-image 
+                class="chat-operater__image" 
+                src="../../assets/images/call_icon.png" />  
+        </cover-view>
+        <cover-view 
+            class="chat-operater__item" 
+            hover-class="hover-class" 
+            bindtap="soundToggle">
+            <cover-image 
+                class="chat-operater__image" 
+                src="../../assets/images/{{isMuted?'sound-dis':'sound'}}.png" />
         </cover-view>
     </cover-view>
 </view>

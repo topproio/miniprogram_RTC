@@ -14,6 +14,7 @@ Page({
 
     onLoad: function(option) {
         friendId = option.id;
+
         const friendAvatar = option.avatar || '';
         this.setData({ friendAvatar });
 
@@ -66,6 +67,12 @@ Page({
         this.setData({ playUrl, isChating: true });
     },
 
+    playStateChange: function(e) {
+        const { code } = e.detail;
+
+        console.log(code);
+    },
+
     waitCountDown: function() {
         waitTimer = setTimeout(() => {
             clearTimeout(waitTimer);
@@ -73,7 +80,7 @@ Page({
 
             this.stopChat();
             wx.showToast({ title: '退出通话 等待超时', icon: 'none' });
-        }, 20 * 1000);
+        }, 90 * 1000);
     },
 
     stopChat: function() {

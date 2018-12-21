@@ -67,6 +67,12 @@ Page({
         this.setData({ playUrl, isChating: true });
     },
 
+    playStateChange: function(e) {
+        const { code } = e.detail;
+
+        console.log(code);
+    },
+
     waitCountDown: function() {
         waitTimer = setTimeout(() => {
             clearTimeout(waitTimer);

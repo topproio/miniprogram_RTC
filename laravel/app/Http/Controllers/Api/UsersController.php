@@ -37,9 +37,7 @@ class UsersController extends Controller
             return $this->response->array( apiResponse(null, '你已经添加过了', 500) );
         }
 
-    	Auth::user()->UserFriends()->create([
-    		'friend_id' => $friendId
-    	]);
+    	Auth::user()->UserFriends()->create([ 'friend_id' => $friendId ]);
 
     	return $this->response->array( apiResponse(null, 'success') );
     }

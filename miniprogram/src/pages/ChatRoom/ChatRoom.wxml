@@ -20,6 +20,7 @@
             src="{{playUrl}}"
             mode="SD" 
             autoplay
+            bindstatechange="playStateChange"
             class="chat-player"
         />
 
@@ -28,7 +29,7 @@
             url="{{pushUrl}}"
             mode="SD"
             autopush
-            device-position="{{cameraPosition}} "
+            device-position="{{cameraPosition}}"
             bindstatechange="pushStateChange"
             class="chat-pusher"
         />
