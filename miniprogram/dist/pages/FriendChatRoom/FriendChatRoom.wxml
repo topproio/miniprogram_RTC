@@ -1,7 +1,6 @@
 <!--pages/page.wxml-->
 <view class="page">
     <live-player
-        v-if="{{playUrl}}"
         src="{{playUrl}}"
         mode="SD" 
         bindstatechange="playStateChange"
@@ -10,11 +9,11 @@
     />
 
     <live-pusher
-        wx:if="{{pushUrl}}"
+        id="pusher"
         url="{{pushUrl}}"
         mode="SD"
         autopush
-        device-position="{{cameraPosition}} "
+        muted="{{isMuted}}"
         bindstatechange="pushStateChange"
         class="chat-pusher"
     />

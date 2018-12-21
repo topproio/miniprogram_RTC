@@ -1,7 +1,7 @@
 import rtcModel from '../../models/rtc';
 import bus from '../../utils/bus';
 
-let userId, sdkappid, roomId;
+let userId, sdkappid, roomId, pusherEL;
 
 Page({
 
@@ -42,6 +42,10 @@ Page({
         });
     },
 
+    onReady: function() {
+        pusherEL = wx.createLivePusherContext('pusher');
+    },
+
     pushStateChange: function(e) {
         const { code, message } = e.detail;
 
@@ -71,6 +75,7 @@ Page({
     },
 
     cameraToggle: function() {
+        pusherEL.switchCamera();
         const cameraPosition = this.data.cameraPosition === 'front' ? 'back' : 'front';
         this.setData({ cameraPosition });
     },

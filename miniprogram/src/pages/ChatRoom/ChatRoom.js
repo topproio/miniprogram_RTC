@@ -1,7 +1,7 @@
 import dataStore from '../../utils/dataStore';
 import rtcModel from '../../models/rtc';
 
-let sdkappid, roomId, userId, friendId, waitTimer;
+let sdkappid, roomId, userId, friendId, waitTimer, pusherEL;
 Page({
     data: {
         friendAvatar: '',
@@ -23,6 +23,8 @@ Page({
 
     onReady: function() {
         this.waitCountDown();
+
+        pusherEL = wx.createLivePusherContext('pusher');
     },
 
     onUnload: function() {
@@ -92,6 +94,7 @@ Page({
     },
 
     cameraToggle: function() {
+        pusherEL.switchCamera();
         const cameraPosition = this.data.cameraPosition === 'front' ? 'back' : 'front';
         this.setData({ cameraPosition });
     },
