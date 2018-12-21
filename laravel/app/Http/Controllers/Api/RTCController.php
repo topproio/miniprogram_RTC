@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\triat\WebRTCSigApi;
 use Auth;
+use Illuminate\Support\Facades\DB;
 
 class RTCController extends Controller
 {
