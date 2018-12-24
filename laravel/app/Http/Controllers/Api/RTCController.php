@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\triat\WebRTCSigApi;
 use Auth;
+use Illuminate\Support\Facades\DB;
 
 class RTCController extends Controller
 {
@@ -60,6 +61,11 @@ class RTCController extends Controller
 
         if (intval($userId) !== intval($targetId)) {
             return $this->response->array( apiResponse(['userId'=> $userId, 'targetId' => $targetId] , '当前用户没有权限访问', 500) );
+        }
+
+        $hasAdd = DB::table('users_friend')->where('friend_id', $originId)->where('uid', $userId)->exists();
+        if (!$hasAdd) {
+            Auth::user()->UserFriends()->create([ 'friend_id' => $originId ]);
         }
 
         $roomId = $originId.$targetId;

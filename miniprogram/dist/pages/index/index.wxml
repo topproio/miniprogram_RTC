@@ -13,10 +13,9 @@
 			<view class="user-desc">欢迎来到RTC！</view>
 			<view class="user-tips">
 				<view>好友数量 {{ friendCount }} 个</view>
-				<view>通话时长 {{ duration }} 小时</view>
 			</view>
 			<view class="user-operate">			
-				<button class="user-btn" hover-class="hover-class">创建群聊</button>
+				<!-- <button class="user-btn" hover-class="hover-class">创建群聊</button> -->
 				<navigator 
 					url="/pages/AddFriend/AddFriend" 
 					class="user-btn"
@@ -37,7 +36,7 @@
 					<view class="call-time">{{ item.updated_at }}</view>
 				</view>
 				<navigator
-    				url="{{'/pages/ChatRoom/ChatRoom?friendId=' + item.id}}"
+    				url="{{'/pages/ChatRoom/ChatRoom?id=' + item.id + '&avatar=' + (item.avatar || '') }}"
 					class="call-btn" 
     				hover-class="hover-class">呼叫</navigator>
 			</view>
